@@ -6,7 +6,6 @@ from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 from sklearn.utils.validation import check_is_fitted
 
-# Load model and vectorizer
 try:
     with open("vectorizer.pkl", "rb") as f:
         vectorizer = pickle.load(f)
@@ -17,10 +16,8 @@ except:
     st.error("🚨 Model not found! Run `train.py` first.")
     st.stop()
 
-# Initialize PorterStemmer
 ps = PorterStemmer()
 
-# Preprocessing function
 def preprocess_text(text):
     text = text.lower()
     text = nltk.word_tokenize(text)
@@ -29,7 +26,6 @@ def preprocess_text(text):
     text = [ps.stem(word) for word in text]
     return " ".join(text)
 
-# Streamlit UI
 st.set_page_config(page_title="Email Spam Classifier", page_icon="📩")
 
 st.markdown("<h1 style='text-align: center;'>📩 Email Spam Classifier</h1>", unsafe_allow_html=True)
